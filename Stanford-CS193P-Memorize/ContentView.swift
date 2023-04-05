@@ -21,7 +21,7 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    var isFaceUp: Bool = true
+    @State var isFaceUp: Bool = true // state makes it a pointer to a bool somewhere in memory, pointer does not change but value pointed to changes
     
     var body: some View {
         ZStack {
@@ -34,6 +34,9 @@ struct CardView: View {
                 shape.fill()
             }
         }
+        .onTapGesture(perform: {
+            isFaceUp = !isFaceUp
+        })
     }
 }
 
