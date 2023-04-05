@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    var emojis: Array<String> = ["🚂", "🚀", "🚁", "🚜"]
+    // OR var emojis: [String] = ["🚂", "🚀", "🚁", "🚜"]
+    
     var body: some View { // this is a function
         HStack {
-            CardView()
-            CardView(isFaceUp: false)
-            CardView(isFaceUp: false)
-            CardView()
+            ForEach(emojis, id: \.self, content: { emoji in
+                CardView(content: emoji)
+            })
         }
         .padding(.horizontal)
         .foregroundColor(.red)
@@ -21,6 +23,7 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    var content: String
     @State var isFaceUp: Bool = true // state makes it a pointer to a bool somewhere in memory, pointer does not change but value pointed to changes
     
     var body: some View {
@@ -29,7 +32,7 @@ struct CardView: View {
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
                 shape.stroke(lineWidth: 3)
-                Text("✈️").font(.largeTitle)
+                Text(content).font(.largeTitle)
             } else {
                 shape.fill()
             }
