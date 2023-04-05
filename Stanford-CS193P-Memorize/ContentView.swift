@@ -11,8 +11,8 @@ struct ContentView: View {
     var body: some View { // this is a function
         HStack {
             CardView()
-            CardView()
-            CardView()
+            CardView(isFaceUp: false)
+            CardView(isFaceUp: false)
             CardView()
         }
         .padding(.horizontal)
@@ -21,13 +21,18 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    var isFaceUp: Bool = true
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 25.0) // argument with a label "cornerRadius"
-                .stroke(lineWidth: 3)
-            
-            Text("✈️")
-                .font(.largeTitle)
+            let shape = RoundedRectangle(cornerRadius: 20.0)
+            if isFaceUp {
+                shape.fill().foregroundColor(.white)
+                shape.stroke(lineWidth: 3)
+                Text("✈️").font(.largeTitle)
+            } else {
+                shape.fill()
+            }
         }
     }
 }
