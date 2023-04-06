@@ -15,12 +15,15 @@ struct ContentView: View {
     
     var body: some View { // this is a function
         VStack {
-            
-            HStack {
-                ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
-                    CardView(content: emoji)
-                })
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))], spacing: 10) {
+                    ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
+                        CardView(content: emoji)
+                            .aspectRatio(2/3, contentMode: .fit)
+                    })
+                }
             }
+            .foregroundColor(.red)
             Spacer()
             HStack {
                 remove
@@ -29,11 +32,8 @@ struct ContentView: View {
             }
             .font(.largeTitle)
             .padding(.horizontal)
-            
-
         }
         .padding(.horizontal)
-        .foregroundColor(.red)
     }
     
     var remove: some View {
@@ -66,7 +66,7 @@ struct CardView: View {
             let shape = RoundedRectangle(cornerRadius: 20.0)
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
-                shape.stroke(lineWidth: 3)
+                shape.strokeBorder(lineWidth: 3)
                 Text(content).font(.largeTitle)
             } else {
                 shape.fill()
@@ -89,6 +89,10 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .preferredColorScheme(.dark)
         ContentView()
+            .preferredColorScheme(.light)
+        ContentView()
+            .previewInterfaceOrientation(.landscapeLeft)
+            .previewDisplayName("landscape")
             .preferredColorScheme(.light)
     }
 }
