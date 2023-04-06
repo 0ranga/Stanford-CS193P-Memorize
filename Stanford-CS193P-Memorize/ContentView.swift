@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View { // this is a function
         VStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))], spacing: 10) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
@@ -57,17 +57,19 @@ struct ContentView: View {
     }
 }
 
+
 struct CardView: View {
     var content: String
     @State var isFaceUp: Bool = true // state makes it a pointer to a bool somewhere in memory, pointer does not change but value pointed to changes
     
     var body: some View {
         ZStack {
-            let shape = RoundedRectangle(cornerRadius: 20.0)
+            let shape = RoundedRectangle(cornerRadius: 15.0)
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
                 shape.strokeBorder(lineWidth: 3)
                 Text(content).font(.largeTitle)
+                    .padding()
             } else {
                 shape.fill()
             }
@@ -77,10 +79,6 @@ struct CardView: View {
         })
     }
 }
-
-
-
-
 
 
 
