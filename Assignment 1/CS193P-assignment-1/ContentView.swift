@@ -13,14 +13,25 @@ struct ContentView: View {
     var theme3 = ["🍐", "🍆", "🍓", "🍋", "🫚", "🥒", "🍑", "🌽"]
 
     @State var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶"]
-    var emojiCount = 16
+    @State var emojiCount = 13
+    
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    
+    func widthThatBestFits(cardCount: Int) -> CGFloat {
+        let area = (screenWidth*0.8) * (screenHeight*0.8)
+        let cardArea: CGFloat = area/CGFloat(cardCount)
+        let width = sqrtf(2*Float(cardArea)/3)
+        
+        return CGFloat(width*0.75)
+    }
     
     var body: some View {
         VStack {
             Text("Memorize!").font(.largeTitle)
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
-                    ForEach(emojis, id: \.self) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: widthThatBestFits(cardCount: emojiCount)))]) {
+                    ForEach(emojis[0..<emojiCount], id: \.self) {
                         emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
@@ -38,6 +49,7 @@ struct ContentView: View {
             Spacer()
             VStack{
                 Button(action: {
+                    emojiCount = Int.random(in: 4...theme1.count)
                     emojis = theme1.shuffled()
                 }, label: {
                     Image(systemName: "car")
@@ -48,6 +60,7 @@ struct ContentView: View {
             Spacer()
             VStack {
                 Button(action: {
+                    emojiCount = Int.random(in: 4...theme2.count)
                     emojis = theme2.shuffled()
                 }, label: {
                     Image(systemName: "gamecontroller")
@@ -57,6 +70,7 @@ struct ContentView: View {
             Spacer()
             VStack {
                 Button(action: {
+                    emojiCount = Int.random(in: 4...theme3.count)
                     emojis = theme3.shuffled()
                 }, label: {
                     Image(systemName: "carrot")
