@@ -40,7 +40,7 @@ struct ContentView: View {
                 Button(action: {
                     emojis = theme1.shuffled()
                 }, label: {
-                    Image(systemName: "car.circle")
+                    Image(systemName: "car")
                 })
                 Text("Vehicles").font(.subheadline)
             }
@@ -50,18 +50,18 @@ struct ContentView: View {
                 Button(action: {
                     emojis = theme2.shuffled()
                 }, label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "gamecontroller")
                 })
-                Text("Theme 2").font(.subheadline)
+                Text("Objects").font(.subheadline)
             }
             Spacer()
             VStack {
                 Button(action: {
                     emojis = theme3.shuffled()
                 }, label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "carrot")
                 })
-                Text("Theme 2").font(.subheadline)
+                Text("Fruits").font(.subheadline)
             }
             Spacer()
         }
