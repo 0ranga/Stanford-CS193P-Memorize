@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     static let emojis: Array<String> = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
     
     static func createMemoryGame() -> MemoryGame<String> {
@@ -16,9 +16,16 @@ class EmojiMemoryGame {
         }
     }
     
-    private var model: MemoryGame<String> = createMemoryGame() // private(set) -> other classes can look but not modify it
+    @Published private var model: MemoryGame<String> = createMemoryGame() // private(set) -> other classes can look but not modify it
     
     var cards: Array<MemoryGame<String>.Card> {
-        return model.cards
+        model.cards // not return needed since it is the only statement in here
+    }
+    
+    // MARK: - Intent(s)
+    
+    func choose(_ card: MemoryGame<String>.Card) {
+//        objectWillChange.send() // not needed because we used the @Published keyword in front of var model
+        model.choose(card) // since model.choose is a mutating func, SwiftUI knows automatically that when calling it, it will change, that is how it is linked to the @Published keyword and will call on its own the func objectWillChange()
     }
 }
