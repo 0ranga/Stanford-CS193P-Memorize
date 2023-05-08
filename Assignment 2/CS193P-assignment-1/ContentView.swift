@@ -30,7 +30,13 @@ struct ContentView: View {
                     }
                 }
             }
-            .foregroundColor(.red)
+            .foregroundColor(viewModel.themeColor)
+            Button(action: {
+                viewModel.newGame()
+            }, label: {
+                Text("New Game").font(.title)
+            })
+            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
