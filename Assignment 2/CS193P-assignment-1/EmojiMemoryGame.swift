@@ -12,14 +12,18 @@ class EmojiMemoryGame: ObservableObject {
     static let emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶"]
     
     static func createMemoryGame(for theme: Theme) -> MemoryGame<String> {
-        MemoryGame(numberOfPairs: theme.numberOfPairs, createCardContent: {(pairIndex: Int) in
-            return theme.emojiSet[pairIndex]
+        
+        MemoryGame(numberOfPairs: theme.numberOfPairs >= theme.emojiSet.count ? theme.emojiSet.count : theme.numberOfPairs, createCardContent: {(pairIndex: Int) in
+            if let aRandEl = theme.emojiSet.randomElement() {
+                return aRandEl
+            }
+            return nil
         })
     }
     
     static let transportTheme: Theme = Theme(name: "Transport", emojiSet: ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶"], color: "red", numberOfPairs: 4)
     
-    static let deviceTheme: Theme = Theme(name: "Transport", emojiSet: ["⌚️", "📱", "🕹️", "📀", "🎞️", "🎛️", "💡", "⏳", "📽️", "💾"], color: "blue", numberOfPairs: 6)
+    static let deviceTheme: Theme = Theme(name: "Transport", emojiSet: ["⌚️", "📱", "🕹️", "📀", "🎞️", "🎛️", "💡", "⏳", "📽️", "💾"], color: "blue", numberOfPairs: 14)
     
     @Published private var model: MemoryGame<String>
     private var currentTheme: Theme
