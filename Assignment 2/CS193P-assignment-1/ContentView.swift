@@ -11,10 +11,6 @@ struct ContentView: View {
     
     @ObservedObject var viewModel: EmojiMemoryGame
     
-    var theme1 = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶"]
-    var theme2 = ["⌚️", "📱", "🕹️", "📀", "🎞️", "🎛️", "💡", "⏳", "📽️", "💾"]
-    var theme3 = ["🍐", "🍆", "🍓", "🍋", "🫚", "🥒", "🍑", "🌽"]
-    
     var body: some View {
         VStack {
             Text(viewModel.themeName).font(.largeTitle)
@@ -31,6 +27,7 @@ struct ContentView: View {
                 }
             }
             .foregroundColor(viewModel.themeColor)
+            Text("Score: \(String(viewModel.score))").font(.title2)
             Button(action: {
                 viewModel.newGame()
             }, label: {
