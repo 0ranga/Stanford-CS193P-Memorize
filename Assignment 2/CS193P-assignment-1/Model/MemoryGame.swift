@@ -12,6 +12,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     private var indexOfFaceUpCard: Int?
     
+    private var lastChosenTime: Date?
+    
+    //max(10 - (number of seconds since last card was chosen), 1) x (the number of points you would have otherwise earned or been penalized with)
+    
     private(set) var score = 0
     
     mutating func choose(_ card: Card) {
@@ -19,6 +23,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         if let currentIndex = cards.firstIndex(where: {$0.id == card.id}),
            !cards[currentIndex].isMatched,
            !cards[currentIndex].isFaceUp {
+            
+            let currentTime = Date.now
+            let oldTime = lastChosenTime ?? nil
+            lastChosenTime = currentTime
+            
+            
             if let indexPotentialMatch = indexOfFaceUpCard {
                 // 2 cards are up
                 if cards[currentIndex].content == cards[indexPotentialMatch].content {
@@ -26,12 +36,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[currentIndex].isMatched = true
                     cards[indexPotentialMatch].isMatched = true
                     
-                    score+=2
+                    score = score + max(10 - Int(DateInterval(start: oldTime!, end: currentTime).duration.rounded()), 1)*2
                 } else {
                     
                     for i in [currentIndex, indexPotentialMatch] {
                         if cards[i].seen {
-                            score-=1
+                            score = score + max(10 - Int(DateInterval(start: oldTime!, end: currentTime).duration.rounded()), 1)*(-1)
                         }
                     }
 

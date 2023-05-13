@@ -18,7 +18,7 @@ struct ContentView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
                     ForEach(viewModel.cards) {
                         card in
-                        CardView(card: card)
+                        CardView(card: card, themeColor: viewModel.themeColor)
                             .aspectRatio(2/3, contentMode: .fit)
                             .onTapGesture {
                                 viewModel.choose(card)
@@ -26,7 +26,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .foregroundColor(viewModel.themeColor)
+//            .foregroundColor(viewModel.themeColor[0])
             Text("Score: \(String(viewModel.score))").font(.title2)
             Button(action: {
                 viewModel.newGame()
@@ -41,18 +41,21 @@ struct ContentView: View {
 
 struct CardView: View {
     let card: MemoryGame<String>.Card
+    let themeColor: [Color]
     
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
             if card.isFaceUp {
                 shape.fill(.white)
-                shape.strokeBorder(lineWidth: 3)
+
+                shape.strokeBorder(Gradient(colors: themeColor), lineWidth: 3)
                 Text(card.content).font(.largeTitle).padding()
             } else if card.isMatched {
                 shape.opacity(0)
             } else {
-                shape.fill()
+//                shape.fill()
+                shape.fill(Gradient(colors: themeColor))
             }
         }
     }
@@ -62,10 +65,14 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
         ContentView(viewModel: game)
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
         ContentView(viewModel: game)
             .preferredColorScheme(.dark)
             .previewDisplayName("Landscape")
             .previewInterfaceOrientation(.landscapeLeft)
+        ContentView(viewModel: game)
+            .previewDisplayName("iPad")
+            .previewDevice("iPad mini (6th generation)")
+
     }
 }

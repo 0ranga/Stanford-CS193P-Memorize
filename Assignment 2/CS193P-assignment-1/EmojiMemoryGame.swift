@@ -26,22 +26,24 @@ class EmojiMemoryGame: ObservableObject {
     private var currentTheme: Theme
     private var themes: Array<Theme>
     
-    var themeColor: Color {
+    var themeColor: [Color] {
         switch currentTheme.color {
         case "red":
-            return Color.red
+            return [Color.red]
         case "blue":
-            return Color.blue
+            return [Color.blue]
         case "orange":
-            return Color.orange
+            return [Color.orange]
         case "purple":
-            return Color.purple
+            return [Color.purple]
         case "green":
-            return Color.green
+            return [Color.green]
         case "indigo":
-            return Color.indigo
+            return [Color.indigo]
+        case "indigoToRed":
+            return [Color.indigo, Color.red]
         default:
-            return Color.gray
+            return [Color.gray]
         }
     }
     
@@ -67,7 +69,7 @@ class EmojiMemoryGame: ObservableObject {
         themes.append(Theme(name: "Fruits", emojiSet: ["🍐", "🍆", "🍓", "🍋", "🫚", "🥒", "🍑", "🌽"], color: "purple", numberOfPairs: 14))
         themes.append(Theme(name: "Halloween", emojiSet: ["👻", "🎃", "🕷️"], color: "orange", numberOfPairs: 3))
         themes.append(Theme(name: "Angry", emojiSet: ["😡", "😤", "🤬", "😖", "😠", "😾"], color: "green", numberOfPairs: 6))
-        themes.append(Theme(name: "Space", emojiSet: ["🔭", "🪐", "☄️", "🛸", "👽", "🛰️", "🚀", "👾"], color: "indigo", numberOfPairs: 5))
+        themes.append(Theme(name: "Space", emojiSet: ["🔭", "🪐", "☄️", "🛸", "👽", "🛰️", "🚀", "👾"], color: "indigoToRed", random: true))
         
         currentTheme = themes.randomElement()!
         model = EmojiMemoryGame.createMemoryGame(for: currentTheme)
