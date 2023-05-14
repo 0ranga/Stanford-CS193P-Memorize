@@ -8,15 +8,17 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    static let emojis: Array<String> = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
+    typealias Card = MemoryGame<String>.Card
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static let emojis: Array<String> = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
+    
+    private static func createMemoryGame() -> MemoryGame<String> {
         MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in
             emojis[pairIndex]
         }
     }
     
-    @Published private var model: MemoryGame<String> = createMemoryGame() // private(set) -> other classes can look but not modify it
+    @Published private var model = createMemoryGame() // private(set) -> other classes can look but not modify it
     
     var cards: Array<MemoryGame<String>.Card> {
         model.cards // not return needed since it is the only statement in here

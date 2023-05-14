@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    @ObservedObject var viewModel : EmojiMemoryGame // @ObservedObject means that when this thing changes, we need to redraw the whole body
+    @ObservedObject var game : EmojiMemoryGame // @ObservedObject means that when this thing changes, we need to redraw the whole body
     
     var body: some View { // this is a function
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(viewModel.cards, content: { card in
+                ForEach(game.cards, content: { card in
                     CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit)
                         .onTapGesture {
-                            viewModel.choose(card)
+                            game.choose(card)
                         }
                 })
             }
@@ -29,7 +29,7 @@ struct EmojiMemoryGameView: View {
 
 
 struct CardView: View {
-    let card: MemoryGame<String>.Card
+    let card: EmojiMemoryGame.Card
     
     var body: some View {
         ZStack {
@@ -53,13 +53,13 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
-        EmojiMemoryGameView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.dark)
-        EmojiMemoryGameView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.light)
             .previewDevice("iPhone 12 mini")
             .previewDisplayName("iPhone 12")
-        EmojiMemoryGameView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .previewInterfaceOrientation(.landscapeLeft)
             .previewDisplayName("landscape")
             .preferredColorScheme(.light)

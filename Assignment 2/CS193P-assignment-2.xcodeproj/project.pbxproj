@@ -41,12 +41,12 @@
 		ED838B112A10DE3E000893DD /* CS193P-assignment-1 */ = {
 			isa = PBXGroup;
 			children = (
-				ED838B122A10DE3E000893DD /* Assets.xcassets */,
-				ED838B132A10DE3E000893DD /* EmojiMemoryGame.swift */,
-				ED838B142A10DE3E000893DD /* Preview Content */,
-				ED838B162A10DE3E000893DD /* Model */,
 				ED838B192A10DE3E000893DD /* CS193P_assignment_1App.swift */,
 				ED838B1A2A10DE3E000893DD /* ContentView.swift */,
+				ED838B132A10DE3E000893DD /* EmojiMemoryGame.swift */,
+				ED838B162A10DE3E000893DD /* Model */,
+				ED838B122A10DE3E000893DD /* Assets.xcassets */,
+				ED838B142A10DE3E000893DD /* Preview Content */,
 			);
 			path = "CS193P-assignment-1";
 			sourceTree = "<group>";
