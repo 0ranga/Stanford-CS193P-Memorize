@@ -14,6 +14,7 @@
 		EDA4A40429E4D217007C1AF5 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA4A40329E4D217007C1AF5 /* MemoryGame.swift */; };
 		EDA4A40629E4D3E1007C1AF5 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA4A40529E4D3E1007C1AF5 /* EmojiMemoryGame.swift */; };
 		EDE5BAB92A12C81500B71810 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5BAB82A12C81500B71810 /* AspectVGrid.swift */; };
+		EDE5BABB2A12D3C900B71810 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5BABA2A12D3C900B71810 /* Pie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		EDA4A40329E4D217007C1AF5 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		EDA4A40529E4D3E1007C1AF5 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		EDE5BAB82A12C81500B71810 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
+		EDE5BABA2A12D3C900B71810 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				ED58BE2F29DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift */,
 				ED58BE3129DCF90100EE59BC /* EmojiMemoryGameView.swift */,
+				EDE5BABA2A12D3C900B71810 /* Pie.swift */,
 				EDE5BAB82A12C81500B71810 /* AspectVGrid.swift */,
 				EDA4A40329E4D217007C1AF5 /* MemoryGame.swift */,
 				EDA4A40529E4D3E1007C1AF5 /* EmojiMemoryGame.swift */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE5BABB2A12D3C900B71810 /* Pie.swift in Sources */,
 				EDA4A40429E4D217007C1AF5 /* MemoryGame.swift in Sources */,
 				ED58BE3229DCF90100EE59BC /* EmojiMemoryGameView.swift in Sources */,
 				ED58BE3029DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift in Sources */,

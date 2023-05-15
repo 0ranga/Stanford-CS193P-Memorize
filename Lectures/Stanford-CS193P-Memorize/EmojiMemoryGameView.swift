@@ -38,6 +38,8 @@ struct CardView: View {
                 if card.isFaceUp {
                     shape.fill().foregroundColor(.white)
                     shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                        .padding(5).opacity(0.5)
                     Text(card.content).font(font(in: geometry.size))
                 } else if card.isMatched {
                     shape.opacity(0)
@@ -55,7 +57,7 @@ struct CardView: View {
     private struct DrawingConstants {
         static let cornerRadius: CGFloat = 10
         static let lineWidth: CGFloat = 3
-        static let fontScale: CGFloat = 0.75
+        static let fontScale: CGFloat = 0.70
     }
 }
 
@@ -64,15 +66,18 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
-        EmojiMemoryGameView(game: game)
-            .preferredColorScheme(.dark)
-        EmojiMemoryGameView(game: game)
-            .preferredColorScheme(.light)
-            .previewDevice("iPhone 12 mini")
-            .previewDisplayName("iPhone 12")
-        EmojiMemoryGameView(game: game)
-            .previewInterfaceOrientation(.landscapeLeft)
-            .previewDisplayName("landscape")
-            .preferredColorScheme(.light)
+        game.choose(game.cards.first!)
+        return Group {
+            EmojiMemoryGameView(game: game)
+                .preferredColorScheme(.dark)
+            EmojiMemoryGameView(game: game)
+                .preferredColorScheme(.light)
+                .previewDevice("iPhone 12 mini")
+                .previewDisplayName("iPhone 12")
+            EmojiMemoryGameView(game: game)
+                .previewInterfaceOrientation(.landscapeLeft)
+                .previewDisplayName("landscape")
+                .preferredColorScheme(.light)
+        }
     }
 }
