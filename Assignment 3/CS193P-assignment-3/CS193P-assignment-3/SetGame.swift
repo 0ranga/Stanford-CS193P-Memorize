@@ -10,6 +10,7 @@ import Foundation
 struct SetGame {
     
     var cards: Array<Card>
+    var remainingFaceUpCards: Int { cards.filter({ $0.isFaceUp == false }).count }
     
     init(){
         cards = []
@@ -26,8 +27,26 @@ struct SetGame {
             }
         }
         cards.shuffle()
-        for n in 1...12 {
+        for n in 0..<12 {
             cards[n].isFaceUp = true
+        }
+    }
+    
+    mutating func dealThreeCards() {
+        let x = cards.filter { el in
+            el.isFaceUp == false
+        }
+        guard x.count >= 3 else {
+            return
+        }
+        for i in 0..<3 {
+            let toDistributeIndex = cards.firstIndex(where: { selfCard in
+                selfCard.id == x[i].id
+            })
+            if let toDistributeIndex {
+                cards[toDistributeIndex].isFaceUp = true
+            }
+            
         }
     }
     

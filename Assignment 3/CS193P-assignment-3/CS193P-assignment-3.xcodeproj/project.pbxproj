@@ -14,6 +14,7 @@
 		ED31B6002A1918CF000F566C /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B5FF2A1918CF000F566C /* SetGame.swift */; };
 		ED31B6022A192178000F566C /* SetGameVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B6012A192178000F566C /* SetGameVM.swift */; };
 		ED31B6062A1A4996000F566C /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B6052A1A4996000F566C /* Diamond.swift */; };
+		ED31B6082A1A549A000F566C /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B6072A1A549A000F566C /* AspectVGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		ED31B5FF2A1918CF000F566C /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		ED31B6012A192178000F566C /* SetGameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameVM.swift; sourceTree = "<group>"; };
 		ED31B6052A1A4996000F566C /* Diamond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
+		ED31B6072A1A549A000F566C /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				ED31B5EA2A168F2C000F566C /* CS193P_assignment_3App.swift */,
 				ED31B5EC2A168F2C000F566C /* ContentView.swift */,
+				ED31B6072A1A549A000F566C /* AspectVGrid.swift */,
 				ED31B6052A1A4996000F566C /* Diamond.swift */,
 				ED31B6012A192178000F566C /* SetGameVM.swift */,
 				ED31B5FF2A1918CF000F566C /* SetGame.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				ED31B6002A1918CF000F566C /* SetGame.swift in Sources */,
 				ED31B5ED2A168F2C000F566C /* ContentView.swift in Sources */,
+				ED31B6082A1A549A000F566C /* AspectVGrid.swift in Sources */,
 				ED31B5EB2A168F2C000F566C /* CS193P_assignment_3App.swift in Sources */,
 				ED31B6062A1A4996000F566C /* Diamond.swift in Sources */,
 				ED31B6022A192178000F566C /* SetGameVM.swift in Sources */,

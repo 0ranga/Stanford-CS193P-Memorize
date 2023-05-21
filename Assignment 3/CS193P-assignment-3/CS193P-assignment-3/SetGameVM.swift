@@ -9,9 +9,19 @@ import SwiftUI
 
 class SetGameVM: ObservableObject {
     
-    @Published var model = SetGame()
+    @Published private var model = SetGame()
     
     var cards: [SetGame.Card] {
         model.cards
+    }
+    
+    var remainingFaceUpCards: Int {
+        model.remainingFaceUpCards
+    }
+    
+    // MARK: - Intent
+    
+    func dealThreeCards() {
+        model.dealThreeCards()
     }
 }

@@ -12,14 +12,28 @@ struct ContentView: View {
     @ObservedObject var game: SetGameVM
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))], content: {
-                ForEach(game.cards, content: { card in
-                    if card.isFaceUp {
-                        CardView(card: card).aspectRatio(2/3, contentMode: .fit)
-                    }
+        VStack {
+            if game.cards.filter({ $0.isFaceUp == true}).count <= 30 {
+                AspectVGrid(items: game.cards.filter({ $0.isFaceUp == true}), aspectRatio: 2/3, content: { card in
+                    CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                        .padding(3)
                 })
-            })
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                        ForEach(game.cards) { card in
+                            if card.isFaceUp {
+                                CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                                    .padding(3)
+                            }
+                        }
+                    }
+                }
+            }
+            Button { game.dealThreeCards() } label: { Text("Deal 3 more cards").font(.title3) }
+                .buttonStyle(.bordered)
+                .disabled(game.remainingFaceUpCards == 0)
+
         }
         .padding()
     }
@@ -105,5 +119,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = SetGameVM()
         ContentView(game: game)
+        ContentView(game: game)
+            .previewInterfaceOrientation(.landscapeRight)
     }
 }
