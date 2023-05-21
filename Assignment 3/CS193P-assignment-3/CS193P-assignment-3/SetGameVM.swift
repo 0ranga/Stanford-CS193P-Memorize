@@ -15,8 +15,8 @@ class SetGameVM: ObservableObject {
         model.cards
     }
     
-    var remainingFaceUpCards: Int {
-        model.remainingFaceUpCards
+    var numberOfCardsLeftToDeal: Int {
+        model.numberOfCardsLeftToDeal
     }
     
     // MARK: - Intent

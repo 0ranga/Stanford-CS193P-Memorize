@@ -13,8 +13,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if game.cards.filter({ $0.isFaceUp == true}).count <= 30 {
-                AspectVGrid(items: game.cards.filter({ $0.isFaceUp == true}), aspectRatio: 2/3, content: { card in
+            if game.cards.filter({ $0.hasBeenDealt == true}).count <= 30 {
+                AspectVGrid(items: game.cards.filter({ $0.hasBeenDealt == true}), aspectRatio: 2/3, content: { card in
                     CardView(card: card).aspectRatio(2/3, contentMode: .fit)
                         .padding(3)
                 })
@@ -22,7 +22,7 @@ struct ContentView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                         ForEach(game.cards) { card in
-                            if card.isFaceUp {
+                            if card.hasBeenDealt {
                                 CardView(card: card).aspectRatio(2/3, contentMode: .fit)
                                     .padding(3)
                             }
@@ -30,9 +30,9 @@ struct ContentView: View {
                     }
                 }
             }
-            Button { game.dealThreeCards() } label: { Text("Deal 3 more cards").font(.title3) }
+            Button { game.dealThreeCards() } label: { Text("Deal").font(.title3) }
                 .buttonStyle(.bordered)
-                .disabled(game.remainingFaceUpCards == 0)
+                .disabled(game.numberOfCardsLeftToDeal == 0)
 
         }
         .padding()

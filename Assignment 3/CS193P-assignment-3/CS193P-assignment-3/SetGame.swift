@@ -10,7 +10,8 @@ import Foundation
 struct SetGame {
     
     var cards: Array<Card>
-    var remainingFaceUpCards: Int { cards.filter({ $0.isFaceUp == false }).count }
+    var cardsLeftToDeal: Array<Card> { cards.filter({ $0.hasBeenDealt == false }) }
+    var numberOfCardsLeftToDeal: Int { cardsLeftToDeal.count }
     
     init(){
         cards = []
@@ -22,21 +23,18 @@ struct SetGame {
                         cards.append(Card(numberOfShapes: n, shape: shap, color: col, shading: shad, id: id))
                         id+=1
                     }
-                    
                 }
             }
         }
         cards.shuffle()
         for n in 0..<12 {
-            cards[n].isFaceUp = true
+            cards[n].hasBeenDealt = true
         }
     }
     
     mutating func dealThreeCards() {
-        let x = cards.filter { el in
-            el.isFaceUp == false
-        }
-        guard x.count >= 3 else {
+        let x = cardsLeftToDeal
+        guard numberOfCardsLeftToDeal >= 3 else {
             return
         }
         for i in 0..<3 {
@@ -44,7 +42,7 @@ struct SetGame {
                 selfCard.id == x[i].id
             })
             if let toDistributeIndex {
-                cards[toDistributeIndex].isFaceUp = true
+                cards[toDistributeIndex].hasBeenDealt = true
             }
             
         }
@@ -56,7 +54,7 @@ struct SetGame {
         let color: Color
         let shading: Shading
         var isMatched: Bool = false
-        var isFaceUp: Bool = false
+        var hasBeenDealt: Bool = false
         let id: Int
     }
     
