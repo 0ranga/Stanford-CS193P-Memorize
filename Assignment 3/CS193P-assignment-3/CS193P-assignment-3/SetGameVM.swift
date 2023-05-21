@@ -15,6 +15,10 @@ class SetGameVM: ObservableObject {
         model.cards
     }
     
+    var cardsLeftToDeal: Array<SetGame.Card> {
+        model.cardsLeftToDeal
+    }
+    
     var numberOfCardsLeftToDeal: Int {
         model.numberOfCardsLeftToDeal
     }

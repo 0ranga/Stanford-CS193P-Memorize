@@ -13,23 +13,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if game.cards.filter({ $0.hasBeenDealt == true}).count <= 30 {
-                AspectVGrid(items: game.cards.filter({ $0.hasBeenDealt == true}), aspectRatio: 2/3, content: { card in
-                    CardView(card: card).aspectRatio(2/3, contentMode: .fit)
-                        .padding(3)
-                })
-            } else {
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                        ForEach(game.cards) { card in
-                            if card.hasBeenDealt {
-                                CardView(card: card).aspectRatio(2/3, contentMode: .fit)
-                                    .padding(3)
-                            }
-                        }
-                    }
-                }
-            }
+            AspectVGrid(items: game.cards.filter({ $0.hasBeenDealt == true}), aspectRatio: 2/3, minWidth: 70, content: { card in
+                CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                    .padding(3)
+            })
             HStack {
                 Button { game.dealThreeCards() } label: { Text("Deal").font(.title3) }
                     .buttonStyle(.bordered)
