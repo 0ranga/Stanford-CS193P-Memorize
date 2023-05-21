@@ -9,13 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var game: SetGameVM
+    @ObservedObject var game: SetGameVM
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))], content: {
                 ForEach(game.cards, content: { card in
-                    CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                    if card.isFaceUp {
+                        CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                    }
                 })
             })
         }

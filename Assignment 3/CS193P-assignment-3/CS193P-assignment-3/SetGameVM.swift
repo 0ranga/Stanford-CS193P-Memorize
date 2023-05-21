@@ -14,10 +14,4 @@ class SetGameVM: ObservableObject {
     var cards: [SetGame.Card] {
         model.cards
     }
-    
-    
-    
-    init() {
-        print(model.cards)
-    }
 }

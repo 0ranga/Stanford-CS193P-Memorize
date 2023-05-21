@@ -26,6 +26,9 @@ struct SetGame {
             }
         }
         cards.shuffle()
+        for n in 1...12 {
+            cards[n].isFaceUp = true
+        }
     }
     
     struct Card: Identifiable {
@@ -34,6 +37,7 @@ struct SetGame {
         let color: Color
         let shading: Shading
         var isMatched: Bool = false
+        var isFaceUp: Bool = false
         let id: Int
     }
     
