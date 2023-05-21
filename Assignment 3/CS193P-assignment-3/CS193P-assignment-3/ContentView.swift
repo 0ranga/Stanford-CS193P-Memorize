@@ -58,11 +58,11 @@ struct CardView: View {
             
         case .diamond:
             if cardStyle == .bordered {
-                strokedSymbol(el: Rectangle())
+                strokedSymbol(el: Diamond())
             } else if cardStyle == .striped {
-                stripedSymbol(el: Rectangle())
+                stripedSymbol(el: Diamond())
             } else {
-                Rectangle()
+                Diamond()
             }
 
         case .squiggles:
