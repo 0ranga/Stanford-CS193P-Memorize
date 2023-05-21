@@ -30,10 +30,13 @@ struct ContentView: View {
                     }
                 }
             }
-            Button { game.dealThreeCards() } label: { Text("Deal").font(.title3) }
-                .buttonStyle(.bordered)
-                .disabled(game.numberOfCardsLeftToDeal == 0)
-
+            HStack {
+                Button { game.dealThreeCards() } label: { Text("Deal").font(.title3) }
+                    .buttonStyle(.bordered)
+                    .disabled(game.numberOfCardsLeftToDeal == 0)
+                Button { game.newGame() } label: { Text("New Game").font(.title3) }
+                    .buttonStyle(.bordered)
+            }
         }
         .padding()
     }

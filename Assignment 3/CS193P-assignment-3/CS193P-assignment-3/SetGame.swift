@@ -48,6 +48,10 @@ struct SetGame {
         }
     }
     
+    mutating func newGame() {
+        self = SetGame.init()
+    }
+    
     struct Card: Identifiable {
         let numberOfShapes: Int
         let shape: Shape

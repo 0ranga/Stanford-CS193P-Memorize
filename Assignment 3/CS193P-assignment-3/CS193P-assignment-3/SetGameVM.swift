@@ -24,4 +24,8 @@ class SetGameVM: ObservableObject {
     func dealThreeCards() {
         model.dealThreeCards()
     }
+    
+    func newGame() {
+        model.newGame()
+    }
 }
