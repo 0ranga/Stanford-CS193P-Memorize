@@ -52,6 +52,54 @@ struct SetGame {
         self = SetGame.init()
     }
     
+    private func isShapeASet(card1: Card, card2: Card, card3: Card) -> Bool {
+        if card1.shape == card2.shape && card2.shape == card3.shape {
+            return true
+        } else if card1.shape != card2.shape && card2.shape != card3.shape && card1.shape != card3.shape {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isShadingASet(card1: Card, card2: Card, card3: Card) -> Bool {
+        if card1.shading == card2.shading && card2.shading == card3.shading {
+            return true
+        } else if card1.shading != card2.shading && card2.shading != card3.shading && card1.shading != card3.shading {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isColorASet(card1: Card, card2: Card, card3: Card) -> Bool {
+        if card1.color == card2.color && card2.color == card3.color {
+            return true
+        } else if card1.color != card2.color && card2.color != card3.color && card1.color != card3.color {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isNumberASet(card1: Card, card2: Card, card3: Card) -> Bool {
+        if card1.numberOfShapes == card2.numberOfShapes && card2.numberOfShapes == card3.numberOfShapes {
+            return true
+        } else if card1.numberOfShapes != card2.numberOfShapes && card2.numberOfShapes != card3.numberOfShapes && card1.numberOfShapes != card3.numberOfShapes {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isASet(card1: Card, card2: Card, card3: Card) -> Bool {
+        if isColorASet(card1: card1, card2: card2, card3: card3) && isShapeASet(card1: card1, card2: card2, card3: card3) && isNumberASet(card1: card1, card2: card2, card3: card3) && isShadingASet(card1: card1, card2: card2, card3: card3) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     struct Card: Identifiable {
         let numberOfShapes: Int
         let shape: Shape

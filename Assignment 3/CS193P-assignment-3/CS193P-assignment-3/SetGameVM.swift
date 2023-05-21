@@ -26,10 +26,15 @@ class SetGameVM: ObservableObject {
     // MARK: - Intent
     
     func dealThreeCards() {
+//        print(model.isASet(card1: cards[0], card2: cards[3], card3: cards[6]))
         model.dealThreeCards()
     }
     
     func newGame() {
         model.newGame()
+    }
+    
+    func isASet(card1: SetGame.Card, card2: SetGame.Card, card3: SetGame.Card) -> Bool {
+        model.isASet(card1: card1, card2: card2, card3: card3)
     }
 }
