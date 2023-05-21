@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], content: {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))], content: {
                 ForEach(game.cards, content: { card in
                     CardView(card: card).aspectRatio(2/3, contentMode: .fit)
                 })
@@ -34,30 +34,60 @@ struct CardView: View {
             rect.strokeBorder(lineWidth: 2)
             VStack {
                 ForEach(0..<card.numberOfShapes, id: \.self) { _ in
-                    shape(cardShape: card.shape)
-                        .foregroundColor(color(cardColor: card.color))
+                    content(cardShape: card.shape, cardStyle: card.shading)
+                        .foregroundColor(cardColor(from: card.color))
+                        .aspectRatio(2/1, contentMode: .fit)
                 }
             }
             .padding()
         }
     }
     
-    @ViewBuilder
-    private func shape(cardShape: SetGame.Shape) -> some View {
-        Group {
-            switch cardShape {
-            case .diamond:
-                Rectangle().strokeBorder(lineWidth: 3)
-            case .squiggles:
-                Rectangle()
-            case .oval:
-                RoundedRectangle(cornerRadius: 20)
-            }
-        }
-        .aspectRatio(2/1, contentMode: .fit)
+    private func strokedSymbol<item: Shape>(el: item) -> some View {
+        el.stroke(lineWidth: 2)
     }
     
-    private func color(cardColor: SetGame.Color) -> Color {
+    private func stripedSymbol<item: Shape>(el: item) -> some View {
+        el.stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+    }
+    
+    @ViewBuilder
+    private func content(cardShape: SetGame.Shape, cardStyle: SetGame.Shading) -> some View {
+
+        switch cardShape {
+            
+        case .diamond:
+            if cardStyle == .bordered {
+                strokedSymbol(el: Rectangle())
+            } else if cardStyle == .striped {
+                stripedSymbol(el: Rectangle())
+            } else {
+                Rectangle()
+            }
+
+        case .squiggles:
+            if cardStyle == .bordered {
+                strokedSymbol(el: Rectangle())
+            } else if cardStyle == .striped {
+                stripedSymbol(el: Rectangle())
+            } else {
+                Rectangle()
+            }
+ 
+        case .oval:
+            if cardStyle == .bordered {
+                strokedSymbol(el: RoundedRectangle(cornerRadius: .infinity))
+            } else if cardStyle == .striped {
+                stripedSymbol(el: RoundedRectangle(cornerRadius: .infinity))
+            } else {
+                RoundedRectangle(cornerRadius: .infinity)
+            }
+            
+        }
+
+    }
+    
+    private func cardColor(from cardColor: SetGame.Color) -> Color {
         switch cardColor {
         case .blue:
             return Color.blue

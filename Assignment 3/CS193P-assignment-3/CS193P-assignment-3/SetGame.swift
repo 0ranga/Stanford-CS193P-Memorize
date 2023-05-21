@@ -25,6 +25,7 @@ struct SetGame {
                 }
             }
         }
+        cards.shuffle()
     }
     
     struct Card: Identifiable {
