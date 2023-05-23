@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED1CDF772A1D6B6800F03515 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1CDF762A1D6B6800F03515 /* Cardify.swift */; };
 		ED58BE3029DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED58BE2F29DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift */; };
 		ED58BE3229DCF90100EE59BC /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED58BE3129DCF90100EE59BC /* EmojiMemoryGameView.swift */; };
 		ED58BE3429DCF90300EE59BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED58BE3329DCF90300EE59BC /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED1CDF762A1D6B6800F03515 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		ED58BE2C29DCF90100EE59BC /* Stanford-CS193P-Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stanford-CS193P-Memorize.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED58BE2F29DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stanford_CS193P_MemorizeApp.swift; sourceTree = "<group>"; };
 		ED58BE3129DCF90100EE59BC /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				ED58BE2F29DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift */,
 				ED58BE3129DCF90100EE59BC /* EmojiMemoryGameView.swift */,
+				ED1CDF762A1D6B6800F03515 /* Cardify.swift */,
 				EDE5BABA2A12D3C900B71810 /* Pie.swift */,
 				EDE5BAB82A12C81500B71810 /* AspectVGrid.swift */,
 				EDA4A40329E4D217007C1AF5 /* MemoryGame.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE5BABB2A12D3C900B71810 /* Pie.swift in Sources */,
+				ED1CDF772A1D6B6800F03515 /* Cardify.swift in Sources */,
 				EDA4A40429E4D217007C1AF5 /* MemoryGame.swift in Sources */,
 				ED58BE3229DCF90100EE59BC /* EmojiMemoryGameView.swift in Sources */,
 				ED58BE3029DCF90100EE59BC /* Stanford_CS193P_MemorizeApp.swift in Sources */,
