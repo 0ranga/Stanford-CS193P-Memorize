@@ -11,19 +11,37 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var game : EmojiMemoryGame // @ObservedObject means that when this thing changes, we need to redraw the whole body
     
     var body: some View { // this is a function
+        VStack {
+            gameBody
+            shuffle
+        }
+        .padding()
+    }
+    
+    var gameBody: some View {
         AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
             if card.isMatched && !card.isFaceUp {
-                Rectangle().opacity(0)
+//                Rectangle().opacity(0)
+                Color.clear // color can behave like a view in the right context, used as a view -> rectangle
             } else {
                 CardView(card: card)
                     .padding(6)
                     .onTapGesture {
-                        game.choose(card)
+                        withAnimation(.easeInOut(duration: 3)) {
+                            game.choose(card)
+                        }
                     }
             }
         }
         .foregroundColor(.red)
-        .padding(.horizontal)
+    }
+    
+    var shuffle: some View {
+        Button("Shuffle") {
+            withAnimation {
+                game.shuffle()
+            }
+        }
     }
 }
 

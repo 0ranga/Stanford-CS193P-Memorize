@@ -30,4 +30,8 @@ class EmojiMemoryGame: ObservableObject {
 //        objectWillChange.send() // not needed because we used the @Published keyword in front of var model
         model.choose(card) // since model.choose is a mutating func, SwiftUI knows automatically that when calling it, it will change, that is how it is linked to the @Published keyword and will call on its own the func objectWillChange()
     }
+    
+    func shuffle() {
+        model.shuffle()
+    }
 }
