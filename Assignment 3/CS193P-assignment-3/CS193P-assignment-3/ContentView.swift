@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            AspectVGrid(items: game.cards.filter({ $0.hasBeenDealt == true}), aspectRatio: 2/3, minWidth: 70, content: { card in
+            AspectVGrid(items: game.cards.filter({ $0.hasBeenDealt.get() == nil}), aspectRatio: 2/3, minWidth: 70, content: { card in
                 CardView(card: card)
                     .aspectRatio(2/3, contentMode: .fit)
                     .padding(3)
@@ -50,7 +50,7 @@ struct CardView: View {
             if let isMatched = card.isMatched.get() {
                 rect.strokeBorder(lineWidth: 2).foregroundColor(isMatched ? .green : .red)
             } else {
-                rect.strokeBorder(lineWidth: 2)
+                rect.strokeBorder(lineWidth: 2).foregroundColor(.black)
             }
             VStack {
                 ForEach(0..<card.numberOfShapes, id: \.self) { _ in

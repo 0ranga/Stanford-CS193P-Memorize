@@ -10,12 +10,12 @@ import Foundation
 struct SetGame {
     
     private(set) var cards: Array<Card>
-    var cardsLeftToDeal: Array<Card> { cards.filter({ $0.hasBeenDealt == false }) }
+    var cardsLeftToDeal: Array<Card> { cards.filter({ $0.hasBeenDealt.get() == false }) }
     var numberOfCardsLeftToDeal: Int { cardsLeftToDeal.count }
     
     private var cardsSelected: [Card] {
         get {
-            cards.filter({$0.isSelected == true})
+            cards.filter({ $0.isSelected == true && $0.hasBeenDealt.get() == nil })
         }
     }
     
@@ -32,9 +32,9 @@ struct SetGame {
                 }
             }
         }
-        cards.shuffle()
+//        cards.shuffle()
         for n in 0..<12 {
-            cards[n].hasBeenDealt = true
+            cards[n].hasBeenDealt = .neutral()
         }
     }
     
@@ -43,19 +43,44 @@ struct SetGame {
         guard numberOfCardsLeftToDeal >= 3 else {
             return
         }
+        if cardsSelected.count == 3 {
+            let isASet = isASet(card1: cardsSelected[0], card2: cardsSelected[1], card3: cardsSelected[2])
+            if isASet {
+                cards.indices.forEach { index in
+                    if cardsSelected.contains(where: { cards[index].id == $0.id}) {
+                        cards[index].hasBeenDealt = .positive()
+                    }
+                }
+            }
+        }
         for i in 0..<3 {
             let toDistributeIndex = cards.firstIndex(where: { selfCard in
                 selfCard.id == x[i].id
             })
             if let toDistributeIndex {
-                cards[toDistributeIndex].hasBeenDealt = true
+                cards[toDistributeIndex].hasBeenDealt = .neutral()
             }
         }
     }
     
     mutating func select(card: Card) {
         if cardsSelected.count == 3 {
-            return
+            let isASet = isASet(card1: cardsSelected[0], card2: cardsSelected[1], card3: cardsSelected[2])
+            if isASet {
+                cards.indices.forEach { index in
+                    if cardsSelected.contains(where: { cards[index].id == $0.id}) {
+                        cards[index].hasBeenDealt = .positive()
+                    }
+                }
+                dealThreeCards()
+            } else {
+                cards.indices.forEach { index in
+                    if cardsSelected.contains(where: { cards[index].id == $0.id}) {
+                        cards[index].isMatched = .neutral()
+                        cards[index].isSelected = false
+                    }
+                }
+            }
         }
         if cardsSelected.count < 3 || card.isSelected {
             let indexOfSelected = cards.firstIndex(where: {$0.id == card.id})
@@ -137,7 +162,7 @@ struct SetGame {
         let color: Color
         let shading: Shading
         var isMatched: ThreeState = .neutral()
-        var hasBeenDealt: Bool = false
+        var hasBeenDealt: ThreeState = .negative()
         var isSelected: Bool = false
         let id: Int
     }
