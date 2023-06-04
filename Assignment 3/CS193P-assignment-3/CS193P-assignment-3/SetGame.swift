@@ -9,9 +9,15 @@ import Foundation
 
 struct SetGame {
     
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     var cardsLeftToDeal: Array<Card> { cards.filter({ $0.hasBeenDealt == false }) }
     var numberOfCardsLeftToDeal: Int { cardsLeftToDeal.count }
+    
+    private var cardsSelected: [Card] {
+        get {
+            cards.filter({$0.isSelected == true})
+        }
+    }
     
     init(){
         cards = []
@@ -44,12 +50,37 @@ struct SetGame {
             if let toDistributeIndex {
                 cards[toDistributeIndex].hasBeenDealt = true
             }
-            
         }
     }
     
-    mutating func newGame() {
-        self = SetGame.init()
+    mutating func select(card: Card) {
+        if cardsSelected.count == 3 {
+            return
+        }
+        if cardsSelected.count < 3 || card.isSelected {
+            let indexOfSelected = cards.firstIndex(where: {$0.id == card.id})
+            if let indexOfSelected {
+                cards[indexOfSelected].isSelected.toggle()
+                if cardsSelected.count == 3 {
+                    let isASet = isASet(card1: cardsSelected[0], card2: cardsSelected[1], card3: cardsSelected[2])
+                    if isASet {
+                        cards.indices.forEach { index in
+                            if cardsSelected.contains(where: { cards[index].id == $0.id}) {
+                                cards[index].isMatched = .positive()
+                            }
+                        }
+                    } else {
+                        cards.indices.forEach { index in
+                            if cardsSelected.contains(where: { cards[index].id == $0.id}) {
+                                cards[index].isMatched = .negative()
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+        }
     }
     
     private func isShapeASet(card1: Card, card2: Card, card3: Card) -> Bool {
@@ -105,9 +136,27 @@ struct SetGame {
         let shape: Shape
         let color: Color
         let shading: Shading
-        var isMatched: Bool = false
+        var isMatched: ThreeState = .neutral()
         var hasBeenDealt: Bool = false
+        var isSelected: Bool = false
         let id: Int
+    }
+    
+    enum ThreeState {
+        case neutral(Bool? = nil)
+        case positive(Bool? = true)
+        case negative(Bool? = false)
+        
+        func get() -> Bool? {
+            switch self {
+            case .neutral(let state):
+                return state
+            case .positive(let state):
+                return state
+            case .negative(let state):
+                return state
+            }
+        }
     }
     
     enum Shape: CaseIterable {

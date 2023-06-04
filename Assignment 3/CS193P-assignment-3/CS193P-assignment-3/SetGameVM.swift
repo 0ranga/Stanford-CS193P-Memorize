@@ -31,7 +31,11 @@ class SetGameVM: ObservableObject {
     }
     
     func newGame() {
-        model.newGame()
+        model = SetGame()
+    }
+    
+    func select(card: SetGame.Card) {
+        model.select(card: card)
     }
     
     func isASet(card1: SetGame.Card, card2: SetGame.Card, card3: SetGame.Card) -> Bool {
